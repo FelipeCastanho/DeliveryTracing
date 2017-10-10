@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "15975488496",
+    "firebase_url": "https://deliverytracing.firebaseio.com",
+    "project_id": "deliverytracing",
+    "storage_bucket": "deliverytracing.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15975488496:android:59ba44820e3b0d04",
+        "android_client_info": {
+          "package_name": "com.example.yoyo.deliverytracing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15975488496-u5tnrlv9j54a6k9e8jkubucp2agcr9vs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.yoyo.deliverytracing",
+            "certificate_hash": "6d81ae0dc1042bcd2921ba09ddc30477ae422027"
+          }
+        },
+        {
+          "client_id": "15975488496-gmdfp0ghuo0l1q6op9ae4m8ft9uvvcg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCRd8wGrbgVs_FK7_Ble1N9flvj8PKBFBs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15975488496-gmdfp0ghuo0l1q6op9ae4m8ft9uvvcg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
