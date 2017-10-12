@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity{
             startActivity(newActivity );
         }
         else if(id.equals("login")){
-
         }
 
     }
