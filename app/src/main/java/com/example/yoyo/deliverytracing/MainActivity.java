@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity{
             startActivity(newActivity );
         }
         else if(id.equals("login")){
+            Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
+            //.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(newActivity );
         }
 
     }
