@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -30,8 +31,11 @@ public class MainActivity extends AppCompatActivity{
         int numId = view.getId();
         String id = view.getResources().getResourceEntryName(numId);
         if(id.equals("rastrear")){
+            EditText et1 = (EditText)findViewById(R.id.codigo);
+            String codigo = et1.getText().toString();
             Intent newActivity = new Intent(MainActivity.this,RastreoActivity.class);
                     //.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);//Con esta linea se mueren las actividades (No la uso aqui porque no es necesario, solo sera necesario despues de iniciar sesion)
+            newActivity.putExtra("codigo", codigo);
             startActivity(newActivity );
         }
         else if(id.equals("login")){
