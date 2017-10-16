@@ -15,4 +15,5 @@
     <string name="ingreseCodigo">Ingrese su código aquí</string>
     <string name="bienvenido">¡Bienvenido!</string>
     <string name="rastrear">Rastrear</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
