@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -20,12 +19,9 @@
                 android:id="@+id/registrarseText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/preguntaText"
-                android:layout_alignStart="@+id/preguntaText"
-                android:layout_alignTop="@+id/registrarImg"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
-                android:text="Registrarse"
+                android:text="@string/registro"
                 android:textSize="26sp"
                 android:layout_marginLeft="10dp" />
 
@@ -33,94 +29,77 @@
                 android:id="@+id/registrarImg"
                 android:layout_width="130dp"
                 android:layout_height="95dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentTop="true"
                 android:layout_marginEnd="14dp"
                 android:layout_marginLeft="100dp"
                 android:layout_marginRight="14dp"
                 android:layout_marginStart="100dp"
                 android:layout_marginTop="10dp"
-                android:src="@mipmap/imagen3" />
+                android:src="@mipmap/imagen3"
+                android:contentDescription="" />
         </LinearLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/registrarImg">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre"
+                android:hint="@string/nombre"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutCedula"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textInputLayoutNombre">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/cedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Cédula"
+                android:hint="@string/c_dula"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutUsuario"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textInputLayoutCedula">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/usuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Usuario"
+                android:hint="@string/usuario"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutContrasena"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textInputLayoutUsuario">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/contrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contraseña"
+                android:hint="@string/contrase_a"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/textInputLayoutConfirmar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textInputLayoutContrasena">
+            android:layout_height="wrap_content">
 
             <EditText
                 android:id="@+id/confirmar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirmar contraseña"
+                android:hint="@string/confirmar_contrase_a"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
@@ -134,25 +113,19 @@
                 android:id="@+id/preguntaText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/adminSwitch"
                 android:layout_marginLeft="11dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="8dp"
-                android:text="¿Eres administrador?"
+                android:text="@string/eres_administrador"
                 android:textSize="20sp" />
 
             <Switch
                 android:id="@+id/adminSwitch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textInputLayoutConfirmar"
                 android:layout_marginLeft="14dp"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="8dp"
-                android:layout_toEndOf="@+id/preguntaText"
-                android:layout_toRightOf="@+id/preguntaText" />
+                android:layout_marginTop="8dp" />
 
         </LinearLayout>
 
@@ -160,7 +133,6 @@
             android:id="@+id/textInputLayoutEmpresa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textInputLayoutContrasena"
             android:layout_marginTop="5dp"
             android:visibility="gone">
 
@@ -168,7 +140,7 @@
                 android:id="@+id/empresa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Nombre Empresa"
+                android:hint="@string/nombre_empresa"
                 android:inputType="text" />
 
         </android.support.design.widget.TextInputLayout>
@@ -179,7 +151,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Registrarse" />
+            android:text="@string/registrarse" />
 
     </LinearLayout>
 </ScrollView>

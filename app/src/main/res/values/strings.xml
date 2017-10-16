@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">DeliveryTracing</string>
+    <string name="eres_administrador">¿Eres administrador?</string>
+    <string name="nombre_empresa">Nombre Empresa</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="confirmar_contrase_a">Confirmar contraseña</string>
+    <string name="nombre">Nombre</string>
+    <string name="c_dula">Cédula</string>
+    <string name="contrase_a">Contraseña</string>
+    <string name="registro">Registrarse</string>
+    <string name="usuario">Usuario</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="registrarme">Registrarme</string>
 </resources>
