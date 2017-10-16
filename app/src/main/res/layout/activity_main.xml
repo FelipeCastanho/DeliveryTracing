@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,82 +7,79 @@
     tools:context="com.example.yoyo.deliverytracing.MainActivity">
 
     <LinearLayout
-        android:layout_width="344dp"
-        android:layout_height="495dp"
-        android:orientation="vertical"
-        android:weightSum="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        android:id="@+id/linearLayout2">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/bienvenido"
             android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1"
+            android:paddingTop="40dp"
+            android:text="@string/bienvenido"
+            android:textSize="30sp"
+            android:textStyle="bold"
+             />
 
-            <TextView
-                android:id="@+id/bienvenido"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:paddingTop="40dp"
-                android:text="¡Bienvenido!"
-                android:textColor="@android:color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/logoInicio"
-                android:layout_width="130dp"
-                android:layout_height="94dp"
-                android:layout_marginRight="10dp"
-                android:paddingTop="20dp"
-                app:srcCompat="@mipmap/imagen1" />
-
-        </LinearLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="87dp"
-            android:layout_weight="0.74">
-
-            <EditText
-                android:id="@+id/codigo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:hint="Ingrese su código aquí" />
-        </android.support.design.widget.TextInputLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/rastrear"
-                android:layout_width="129dp"
-                android:layout_height="wrap_content"
-                android:onClick="buttonTapped"
-                android:text="Rastrear"
-                android:textAlignment="center" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="51dp"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/login"
-                android:layout_width="129dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:onClick="buttonTapped"
-                android:text="Login" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/logoInicio"
+            android:layout_width="130dp"
+            android:layout_height="94dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            app:srcCompat="@mipmap/imagen1" />
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="82dp"
+        android:id="@+id/textInputLayout2"
+        android:layout_below="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:id="@+id/codigo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/ingreseCodigo" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/login"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="28dp"
+        android:onClick="buttonTapped"
+        android:text="@string/login"
+        android:layout_below="@+id/rastrear"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/rastrear"
+        android:layout_width="129dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="63dp"
+        android:onClick="buttonTapped"
+        android:text="@string/rastrear"
+        android:textAlignment="center"
+        android:layout_below="@+id/textInputLayout2"
+        android:layout_alignLeft="@+id/login"
+        android:layout_alignStart="@+id/login" />
+
+
+
+</RelativeLayout>

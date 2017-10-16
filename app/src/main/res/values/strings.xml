@@ -11,4 +11,8 @@
     <string name="usuario">Usuario</string>
     <string name="ingresar">Ingresar</string>
     <string name="registrarme">Registrarme</string>
+    <string name="login">Login</string>
+    <string name="ingreseCodigo">Ingrese su código aquí</string>
+    <string name="bienvenido">¡Bienvenido!</string>
+    <string name="rastrear">Rastrear</string>
 </resources>
