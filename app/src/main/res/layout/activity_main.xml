@@ -6,36 +6,29 @@
     android:layout_height="match_parent"
     tools:context="com.example.yoyo.deliverytracing.MainActivity">
 
-    <LinearLayout
+
+    <TextView
+        android:id="@+id/bienvenido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:id="@+id/linearLayout2">
+        android:paddingTop="40dp"
+        android:text="@string/bienvenido"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_alignTop="@+id/logoInicio" />
 
-        <TextView
-            android:id="@+id/bienvenido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_weight="1"
-            android:paddingTop="40dp"
-            android:text="@string/bienvenido"
-            android:textSize="30sp"
-            android:textStyle="bold"
-             />
+    <ImageView
+        android:id="@+id/logoInicio"
+        android:layout_width="130dp"
+        android:layout_height="94dp"
+        android:layout_marginTop="18dp"
+        app:srcCompat="@mipmap/imagen1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="12dp"
+        android:layout_marginEnd="12dp" />
 
-        <ImageView
-            android:id="@+id/logoInicio"
-            android:layout_width="130dp"
-            android:layout_height="94dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            app:srcCompat="@mipmap/imagen1" />
-
-    </LinearLayout>
 
 
     <android.support.design.widget.TextInputLayout
@@ -43,17 +36,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="82dp"
         android:id="@+id/textInputLayout2"
-        android:layout_below="@+id/linearLayout2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
-        <EditText
-            android:id="@+id/codigo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/ingreseCodigo" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -61,7 +46,7 @@
         android:layout_width="129dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="20dp"
         android:onClick="buttonTapped"
         android:text="@string/login"
         android:layout_below="@+id/rastrear"
@@ -72,14 +57,23 @@
         android:layout_width="129dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="63dp"
+        android:layout_marginTop="74dp"
         android:onClick="buttonTapped"
         android:text="@string/rastrear"
         android:textAlignment="center"
-        android:layout_below="@+id/textInputLayout2"
+        android:layout_below="@+id/codigo"
         android:layout_alignLeft="@+id/login"
         android:layout_alignStart="@+id/login" />
 
+    <EditText
+        android:id="@+id/codigo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/ingreseCodigo"
+        android:layout_marginTop="76dp"
+        android:layout_below="@+id/logoInicio"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>
