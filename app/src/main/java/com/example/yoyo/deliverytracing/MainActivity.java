@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
                                 "Su pedido todavía se encuentra en proceso", Toast.LENGTH_SHORT);
                 toast1.show();
             }
-           else if(!referencia.equals("")){
+           else if (!referencia.equals("")){
                 Intent newActivity = new Intent(MainActivity.this,RastreoActivity.class);
                 newActivity.putExtra("referencia", referencia);
                 startActivity(newActivity );
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity{
 
     protected void onStart() {
         super.onStart();
-        myRef = database.getReference("pedidos/");
+        myRef = database.getReference("pedidos");
         ValueEventListener pedidoListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 map = (Map<String, Object>) dataSnapshot.getValue();
@@ -81,27 +81,19 @@ public class MainActivity extends AppCompatActivity{
     private String buscarPedido(String codigo) {
         String respuesta = "";
         try{
-            int contador = 0;
-            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
-            Map.Entry<String, Object> entry= null;
+            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator(); //Se crea el iterador del map recibido en el listener (Contine todos los pedidos)
+            Map.Entry<String, Object> entry= null; // Se crea la variable auxiliar entry que almacenara la llave y el valor existentes en el map (idPedido - Map con datos de pedido)
             String n=null;
-            Map<String, Object> mapPedidos = null;
-            Map<String, Object> mapPedido = null;
             while (it.hasNext()) {
-                contador++;
                 entry= it.next();
-                n = entry.getKey();
-                mapPedidos = (Map<String, Object>) entry.getValue();
-                Iterator<Map.Entry<String, Object>> itPedidos = map.entrySet().iterator();
-                Map.Entry<String, Object> entryPedidos = itPedidos.next();
-                if(entryPedidos.getKey().equals(codigo)){
-                    mapPedido = (Map<String, Object>) entryPedidos.getValue();
-                    Iterator<Map.Entry<String, Object>> itPedido = mapPedido.entrySet().iterator();
-                    Map.Entry<String, Object> entryPedido = itPedido.next();
+                n = entry.getKey(); // Aqui se tiene la llave del pedido actualmente recorrido en el ciclo
+                if(n.equals(codigo)){
+                    Map<String, Object> mapPedido = (Map<String, Object>) entry.getValue(); // Se asigna el valor del pedido, en este caso un map con todos los datos
+                    Iterator<Map.Entry<String, Object>> itPedido = mapPedido.entrySet().iterator(); // Se crea un iterador para recorrer los datos dentro del pedido
+                    Map.Entry<String, Object> entryPedido = itPedido.next(); // Se crea la variable auxiliar entry que almacena la llave y el valor de un valor especifico ed un pedido
                     respuesta = entryPedido.getKey();
                     entryPedido = itPedido.next();
-                   estado = (String)entryPedido.getValue();
-
+                    estado = (String)entryPedido.getValue();
                 }
             }
         }catch (Exception ex){
