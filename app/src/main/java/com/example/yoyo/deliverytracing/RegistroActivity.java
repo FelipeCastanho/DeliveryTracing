@@ -19,8 +19,10 @@ import java.util.Map;
 
 public class RegistroActivity extends AppCompatActivity {
     FirebaseDatabase database;
-    DatabaseReference myRef;
-    Map<String, Object> map;
+    DatabaseReference myRefEmpleados;
+    DatabaseReference myRefEmpresas;
+    Map<String, Object> mapEmpleado;
+    Map<String, Object> mapEmpresa;
     boolean estado;
 
     @Override
@@ -30,15 +32,25 @@ public class RegistroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         database = FirebaseDatabase.getInstance();
-        myRef = database.getReference("empleados");
+        myRefEmpleados = database.getReference("empleados");
         ValueEventListener empleadoListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                map = (Map<String, Object>) dataSnapshot.getValue();
+                mapEmpleado = (Map<String, Object>) dataSnapshot.getValue();
             }
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        myRef.addValueEventListener(empleadoListener);
+        myRefEmpleados.addValueEventListener(empleadoListener);
+
+        myRefEmpresas = database.getReference("empresas");
+        ValueEventListener empresaListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mapEmpresa = (Map<String, Object>) dataSnapshot.getValue();
+            }
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        myRefEmpresas.addValueEventListener(empresaListener);
 
         Switch isAdmin = (Switch) findViewById(R.id.switchAdmin);
         isAdmin.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -67,15 +79,34 @@ public class RegistroActivity extends AppCompatActivity {
             EditText confirmarContrasena = (EditText) findViewById(R.id.confirmar);
             EditText nombreEmpresa = (EditText) findViewById(R.id.empresa);
 
-            if(!estado){
-                Toast t =
-                        Toast.makeText(getApplicationContext(),
-                                confirmarContrasena.getText() + " " + ultimoEmpleado(), Toast.LENGTH_SHORT);
-                t.show();
-            }else{
-                Toast t =
-                        Toast.makeText(getApplicationContext(),
-                                confirmarContrasena.getText() + " " +nombreEmpresa.getText(), Toast.LENGTH_SHORT);
+            int numeroEmpleado = ultimoEmpleado() + 1;
+            int numeroEmpresa = ultimaEmpresa() + 1;
+
+            try{
+                if(contrasena.getText().toString().equals(confirmarContrasena.getText().toString())){
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("nombreEmpleado").setValue(nombre.getText().toString());
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("cedula").setValue(Integer.parseInt(cedula.getText().toString()));
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("usuario").setValue(usuario.getText().toString());
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("password").setValue(contrasena.getText().toString());
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("latitud").setValue(0);
+                    myRefEmpleados.child("empleado"+numeroEmpleado).child("longitud").setValue(0);
+                    if(!estado){
+                        myRefEmpleados.child("empleado"+numeroEmpleado).child("tipo").setValue("empleado");
+                    }else{
+                        myRefEmpleados.child("empleado"+numeroEmpleado).child("tipo").setValue("administrador");
+                        myRefEmpleados.child("empleado"+numeroEmpleado).child("empresa"+numeroEmpresa).setValue(true);
+                        myRefEmpresas.child("empresa"+numeroEmpresa).child("nombreEmpresa").setValue(nombreEmpresa.getText().toString());
+                    }
+                    Toast t = Toast.makeText(getApplicationContext(), "El registro se ha efectuado exitosamente", Toast.LENGTH_SHORT);
+                    t.show();
+                    finish();
+                }else{
+                    Toast t = Toast.makeText(getApplicationContext(), "Las contraseñas deben coincidir", Toast.LENGTH_SHORT);
+                    t.show();
+                }
+
+            }catch (Exception ex){
+                Toast t = Toast.makeText(getApplicationContext(), "Error en el registro", Toast.LENGTH_SHORT);
                 t.show();
             }
         }
@@ -85,7 +116,7 @@ public class RegistroActivity extends AppCompatActivity {
         int numeroEmpleado;
         try{
 
-            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
+            Iterator<Map.Entry<String, Object>> it = mapEmpleado.entrySet().iterator();
             Map.Entry<String, Object> entry = it.next();
 
             String ultimoEmpleado = entry.getKey();
@@ -98,6 +129,25 @@ public class RegistroActivity extends AppCompatActivity {
         }
 
         return numeroEmpleado;
+    }
+
+    public int ultimaEmpresa(){
+        int numeroEmpresa;
+        try{
+
+            Iterator<Map.Entry<String, Object>> it = mapEmpresa.entrySet().iterator();
+            Map.Entry<String, Object> entry = it.next();
+
+            String ultimoEmpleado = entry.getKey();
+            String[] numero = ultimoEmpleado.split("empresa");
+
+            numeroEmpresa = Integer.parseInt(numero[1]);
+
+        }catch (Exception ex){
+            numeroEmpresa = 1;
+        }
+
+        return numeroEmpresa;
     }
 
 }
