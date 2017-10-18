@@ -6,9 +6,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.Iterator;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference myRef = null;
+    Map<String, Object> map = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,5 +39,83 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    public void buttonTapped(View view) {
+        EditText campo1 = (EditText)findViewById(R.id.usuario);
+        String usuario = campo1.getText().toString();
+        EditText campo2 = (EditText)findViewById(R.id.contrasena);
+        String pass = campo2.getText().toString();
+        String tipo = buscarEmpleado(usuario, pass);
+        if(!tipo.equals("")){
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            tipo, Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+    }
 
+    protected void onStart() {
+        super.onStart();
+        myRef = database.getReference("empleados");
+        ValueEventListener pedidoListener = new ValueEventListener() {
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                map = (Map<String, Object>) dataSnapshot.getValue();
+            }
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        myRef.addValueEventListener(pedidoListener);
+    }
+
+    private String buscarEmpleado(String usuario, String pass) {
+        boolean mensaje = true;
+        try{
+            Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
+            Map.Entry<String, Object> entry = null;
+            String n = null;
+            String user = "", password = "", tipo = "";
+            while (it.hasNext()) {
+                entry= it.next();
+                Map<String, Object> mapUsuario = (Map<String, Object>) entry.getValue();
+                Iterator<Map.Entry<String, Object>> itUsuario = mapUsuario.entrySet().iterator();
+                while (itUsuario.hasNext()) {
+                    Map.Entry<String, Object> entryPedido = itUsuario.next();
+                    if(entryPedido.getKey().equals("usuario")){
+                        user = (String)entryPedido.getValue();
+                    }
+                    else if(entryPedido.getKey().equals("password")){
+                        password = (String)entryPedido.getValue();
+                    }
+                    else if(entryPedido.getKey().equals("tipo")){
+                        tipo = (String)entryPedido.getValue();
+                    }
+                }
+                if(usuario.equals(user)){
+                    if(pass.equals(password)){
+                        return tipo;
+                    }else{
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),
+                                        "Contraseña incorrecta", Toast.LENGTH_SHORT);
+                        toast1.show();
+                        mensaje = false;
+                        break;
+                    }
+                }
+            }
+            if(mensaje){
+                Toast toast1 =
+                        Toast.makeText(getApplicationContext(),
+                                "El usuario no se encuentra registrado", Toast.LENGTH_SHORT);
+                toast1.show();
+            }
+
+        }
+        catch (Exception ex){
+            Toast toast1 =
+                    Toast.makeText(getApplicationContext(),
+                            "Error al iniciar sesión", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+        return "";
+    }
 }

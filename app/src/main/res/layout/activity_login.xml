@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/contrase_a"
-            android:inputType="numberPassword" />
+            android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -65,6 +65,7 @@
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"
         android:layout_marginBottom="18dp"
+        android:onClick="buttonTapped"
         android:text="@string/ingresar" />
 
     <TextView

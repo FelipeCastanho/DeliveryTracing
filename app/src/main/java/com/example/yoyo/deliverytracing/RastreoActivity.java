@@ -33,6 +33,8 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
     String codigo;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRefEmpleado = null;
+    DatabaseReference myRefPedido = null;
+    private DatabaseReference estadoPedido;
     private DatabaseReference mLatitud;
     private DatabaseReference mLongitud;
     private GoogleMap mMap;
@@ -48,11 +50,15 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         String referencia = getIntent().getExtras().getString("referencia");
+        String codigo = getIntent().getExtras().getString("codigo");
         myRefEmpleado = database.getReference("empleados/"+referencia);
+        myRefPedido = database.getReference("pedidos/"+codigo);
         mLatitud = myRefEmpleado.child("latitud");
         mLongitud = myRefEmpleado.child("longitud");
+        estadoPedido = myRefPedido.child("estado");
         mLatitud.addValueEventListener(this);
         mLongitud.addValueEventListener(this);
+        estadoPedido.addValueEventListener(this);
     }
 
     public void onMapReady(GoogleMap googleMap) {
@@ -69,10 +75,6 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
         //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
         marcador = mMap.addMarker(new MarkerOptions().position(coordenadas).title("Mi ubicación"));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16));
-        Toast toast1 =
-                Toast.makeText(getApplicationContext(),
-                        "A", Toast.LENGTH_SHORT);
-        toast1.show();
     }
 
     private void actualizarUbicacion(Location location) {
@@ -84,25 +86,41 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
     }
 
     public void onDataChange(DataSnapshot dataSnapshot) {
-        if(dataSnapshot.getValue(Double.class) != null){
-            String key = dataSnapshot.getKey();
-            if(key.equals("latitud")){
-                Double latitud = dataSnapshot.getValue(Double.class);
-                location.setLatitude(latitud);
-                Toast toast1 =
-                        Toast.makeText(getApplicationContext(),
-                                latitud+"", Toast.LENGTH_SHORT);
-                toast1.show();
-            }else if(key.equals("longitud")){
-                Double longitud = dataSnapshot.getValue(Double.class);
-                location.setLongitude(longitud);
-                Toast toast1 =
-                        Toast.makeText(getApplicationContext(),
-                                longitud+"", Toast.LENGTH_SHORT);
-                toast1.show();
+        try{
+            if(dataSnapshot.getValue(Double.class) != null){
+                String key = dataSnapshot.getKey();
+                if(key.equals("latitud")){
+                    Double latitud = dataSnapshot.getValue(Double.class);
+                    location.setLatitude(latitud);
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    latitud+"", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }else if(key.equals("longitud")) {
+                    Double longitud = dataSnapshot.getValue(Double.class);
+                    location.setLongitude(longitud);
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    longitud + "", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
             }
             actualizarUbicacion(location);
+        }catch (Exception ex) {
+            String key = dataSnapshot.getKey();
+            if (key.equals("estado")) {
+                String estado = dataSnapshot.getValue(String.class);
+                if(!estado.equals("activo")){
+                    Intent newActivity = new Intent(RastreoActivity.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(newActivity);
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),
+                                    "Seguimiento finalizado", Toast.LENGTH_SHORT);
+                    toast1.show();
+                }
+            }
         }
+
     }
 
     public void onCancelled(DatabaseError databaseError) {

@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("Hello, World!");
     }
 
     public void buttonTapped(View view) {
@@ -54,6 +52,7 @@ public class MainActivity extends AppCompatActivity{
            else if (!referencia.equals("")){
                 Intent newActivity = new Intent(MainActivity.this,RastreoActivity.class);
                 newActivity.putExtra("referencia", referencia);
+                newActivity.putExtra("codigo", codigo);
                 startActivity(newActivity );
             }
         }
@@ -112,33 +111,3 @@ public class MainActivity extends AppCompatActivity{
     }
 
 }
-/* ValueEventListener pedidoListener = new ValueEventListener() {
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int contador = 0;
-                String valor = "";
-                try{
-                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                    Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
-                    Map.Entry<String, Object> entry= null;
-                    String n=null;
-                    while (it.hasNext()) {
-                        entry= it.next();
-                        n = entry.getKey(); //clave
-                        contador++;
-                        if(contador == 1) url = "empleados/"+n;
-                    }
-                }catch (Exception ex){
-                    change = false;
-                    Toast toast1 =
-                            Toast.makeText(getApplicationContext(),
-                                    "No se ha encontrado el pedido", Toast.LENGTH_SHORT);
-                    toast1.show();
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        myRef.addValueEventListener(pedidoListener);*/
