@@ -83,28 +83,34 @@ public class RegistroActivity extends AppCompatActivity {
             int numeroEmpresa = ultimaEmpresa() + 1;
 
             try{
-                if(contrasena.getText().toString().equals(confirmarContrasena.getText().toString())){
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("nombreEmpleado").setValue(nombre.getText().toString());
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("cedula").setValue(Integer.parseInt(cedula.getText().toString()));
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("usuario").setValue(usuario.getText().toString());
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("password").setValue(contrasena.getText().toString());
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("latitud").setValue(0);
-                    myRefEmpleados.child("empleado"+numeroEmpleado).child("longitud").setValue(0);
-                    if(!estado){
-                        myRefEmpleados.child("empleado"+numeroEmpleado).child("tipo").setValue("empleado");
-                    }else{
-                        myRefEmpleados.child("empleado"+numeroEmpleado).child("tipo").setValue("administrador");
-                        myRefEmpleados.child("empleado"+numeroEmpleado).child("empresa"+numeroEmpresa).setValue(true);
-                        myRefEmpresas.child("empresa"+numeroEmpresa).child("nombreEmpresa").setValue(nombreEmpresa.getText().toString());
-                    }
-                    Toast t = Toast.makeText(getApplicationContext(), "El registro se ha efectuado exitosamente", Toast.LENGTH_SHORT);
-                    t.show();
-                    finish();
+                if(nombre.getText().toString().equals("") || cedula.getText().toString().equals("") ||
+                     usuario.getText().toString().equals("") || contrasena.getText().toString().equals("") ||
+                        confirmarContrasena.getText().toString().equals("")) {
+                        Toast t = Toast.makeText(getApplicationContext(), "Todos los campos deben estar llenos", Toast.LENGTH_SHORT);
+                        t.show();
                 }else{
-                    Toast t = Toast.makeText(getApplicationContext(), "Las contraseñas deben coincidir", Toast.LENGTH_SHORT);
-                    t.show();
+                    if (contrasena.getText().toString().equals(confirmarContrasena.getText().toString())) {
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("nombreEmpleado").setValue(nombre.getText().toString());
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("cedula").setValue(Integer.parseInt(cedula.getText().toString()));
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("usuario").setValue(usuario.getText().toString());
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("password").setValue(contrasena.getText().toString());
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("latitud").setValue(0);
+                        myRefEmpleados.child("empleado" + numeroEmpleado).child("longitud").setValue(0);
+                        if (!estado) {
+                            myRefEmpleados.child("empleado" + numeroEmpleado).child("tipo").setValue("empleado");
+                        } else {
+                            myRefEmpleados.child("empleado" + numeroEmpleado).child("tipo").setValue("administrador");
+                            myRefEmpleados.child("empleado" + numeroEmpleado).child("empresa" + numeroEmpresa).setValue(true);
+                            myRefEmpresas.child("empresa" + numeroEmpresa).child("nombreEmpresa").setValue(nombreEmpresa.getText().toString());
+                        }
+                        Toast t = Toast.makeText(getApplicationContext(), "El registro se ha efectuado exitosamente", Toast.LENGTH_SHORT);
+                        t.show();
+                        finish();
+                    } else {
+                        Toast t = Toast.makeText(getApplicationContext(), "Las contraseñas deben coincidir", Toast.LENGTH_SHORT);
+                        t.show();
+                    }
                 }
-
             }catch (Exception ex){
                 Toast t = Toast.makeText(getApplicationContext(), "Error en el registro", Toast.LENGTH_SHORT);
                 t.show();
