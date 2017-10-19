@@ -63,11 +63,11 @@
         android:id="@+id/imgLogout"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
         android:background="@mipmap/imagen6"
         android:onClick="buttonTapped"
-        android:layout_alignBottom="@+id/textSaludo"
+        android:layout_above="@+id/imgGestion"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
