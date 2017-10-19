@@ -13,7 +13,7 @@
         android:layout_marginLeft="31dp"
         android:layout_marginStart="31dp"
         android:layout_marginTop="27dp"
-        android:textSize="30sp"
+        android:textSize="32sp"
         android:text="¡Hola!"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
