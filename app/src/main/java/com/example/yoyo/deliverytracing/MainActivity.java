@@ -89,10 +89,20 @@ public class MainActivity extends AppCompatActivity{
                 if(n.equals(codigo)){
                     Map<String, Object> mapPedido = (Map<String, Object>) entry.getValue(); // Se asigna el valor del pedido, en este caso un map con todos los datos
                     Iterator<Map.Entry<String, Object>> itPedido = mapPedido.entrySet().iterator(); // Se crea un iterador para recorrer los datos dentro del pedido
-                    Map.Entry<String, Object> entryPedido = itPedido.next(); // Se crea la variable auxiliar entry que almacena la llave y el valor de un valor especifico ed un pedido
-                    respuesta = entryPedido.getKey();
-                    entryPedido = itPedido.next();
-                    estado = (String)entryPedido.getValue();
+                    Map.Entry<String, Object> entryPedido = null;
+                    if(itPedido.hasNext()){
+                        entryPedido = itPedido.next(); // Se crea la variable auxiliar entry que almacena la llave y el valor de un valor especifico ed un pedido
+                        if(entryPedido.getKey().contains("empleado")){
+                            respuesta = entryPedido.getKey();
+                        }
+                        else if(entry.getKey().equals("estado")){
+                            estado = (String)entryPedido.getValue();
+                            Toast toast1 =
+                                    Toast.makeText(getApplicationContext(),
+                                            estado, Toast.LENGTH_SHORT);
+                            toast1.show();
+                        }
+                    }
                 }
             }
         }catch (Exception ex){
