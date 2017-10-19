@@ -30,7 +30,8 @@
         <activity android:name=".RastreoActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegistroActivity" />
-        <activity android:name=".AdministradorActivity"></activity>
+        <activity android:name=".AdministradorActivity" />
+        <activity android:name=".EmpleadoActivity"></activity>
     </application>
 
 </manifest>

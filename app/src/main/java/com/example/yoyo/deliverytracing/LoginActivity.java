@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = null;
     Map<String, Object> map = null;
-    @Override
+    String nombreUsuario = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -45,11 +45,16 @@ public class LoginActivity extends AppCompatActivity {
         EditText campo2 = (EditText)findViewById(R.id.contrasena);
         String pass = campo2.getText().toString();
         String tipo = buscarEmpleado(usuario, pass);
-        if(!tipo.equals("")){
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            tipo, Toast.LENGTH_SHORT);
-            toast1.show();
+        if(tipo.equals("administrador")){
+            Intent newActivity = new Intent(LoginActivity.this, AdministradorActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            newActivity.putExtra("tipo", tipo);
+            newActivity.putExtra("nombreUsuario", nombreUsuario);
+            startActivity(newActivity );
+        }else if(tipo.equals("empleado")){
+            Intent newActivity = new Intent(LoginActivity.this, EmpleadoActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            newActivity.putExtra("tipo", tipo);
+            newActivity.putExtra("nombreUsuario", nombreUsuario);
+            startActivity(newActivity );
         }
     }
 
@@ -81,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                     Map.Entry<String, Object> entryPedido = itUsuario.next();
                     if(entryPedido.getKey().equals("usuario")){
                         user = (String)entryPedido.getValue();
+                        nombreUsuario = user;
                     }
                     else if(entryPedido.getKey().equals("password")){
                         password = (String)entryPedido.getValue();
