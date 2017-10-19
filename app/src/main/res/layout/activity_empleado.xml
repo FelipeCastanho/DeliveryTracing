@@ -1,9 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.yoyo.deliverytracing.EmpleadoActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/textSaludo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="31dp"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="27dp"
+        android:textSize="32sp"
+        android:text="@string/hola"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imgPedidosDisponibles"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="59dp"
+        android:background="@mipmap/imagen9"
+        android:onClick="buttonTapped"
+        android:layout_below="@+id/textSaludo"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textPedidosDisponibles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgPedidosDisponibles"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp"
+        android:text="@string/pedidos_disponibles"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/imgMisPedidos"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignLeft="@+id/imgPedidosDisponibles"
+        android:layout_alignStart="@+id/imgPedidosDisponibles"
+        android:layout_below="@+id/textPedidosDisponibles"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/imagen8"
+        android:onClick="buttonTapped" />
+
+    <TextView
+        android:id="@+id/textMisPedidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/mis_pedidos"
+        android:textSize="15sp"
+        android:layout_below="@+id/imgMisPedidos"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="11dp" />
+
+    <ImageView
+        android:id="@+id/imgLogout"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@mipmap/imagen6"
+        android:onClick="buttonTapped"
+        android:layout_alignBottom="@+id/textSaludo"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>

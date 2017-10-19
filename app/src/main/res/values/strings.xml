@@ -18,4 +18,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="registrar_pedido">Registrar pedido</string>
     <string name="gestionar_usuarios">Gestionar usuarios</string>
+    <string name="hola">¡Hola!</string>
+    <string name="pedidos_disponibles">Pedidos disponibles</string>
+    <string name="mis_pedidos">Mis pedidos</string>
 </resources>
