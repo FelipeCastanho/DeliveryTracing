@@ -24,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference myRef = null;
     Map<String, Object> map = null;
     String nombreUsuario = "";
+    String idEmpresa = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -49,11 +50,13 @@ public class LoginActivity extends AppCompatActivity {
             Intent newActivity = new Intent(LoginActivity.this, AdministradorActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);
+            newActivity.putExtra("idEmpresa", idEmpresa);
             startActivity(newActivity );
         }else if(tipo.equals("empleado")){
             Intent newActivity = new Intent(LoginActivity.this, EmpleadoActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);
+            newActivity.putExtra("idEmpresa", idEmpresa);
             startActivity(newActivity );
         }
     }
@@ -94,6 +97,8 @@ public class LoginActivity extends AppCompatActivity {
                         tipo = (String)entryPedido.getValue();
                     }else if(entryPedido.getKey().equals("nombreEmpleado")){
                         nombreUsuario = (String) entryPedido.getValue();
+                    }if(entryPedido.getKey().contains("empresa")){
+                        idEmpresa = (String) entryPedido.getValue();
                     }
                 }
                 if(usuario.equals(user)){
