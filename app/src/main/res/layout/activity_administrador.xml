@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,9 +13,62 @@
         android:layout_marginStart="31dp"
         android:layout_marginTop="27dp"
         android:textSize="32sp"
-        android:text="¡Hola!"
+        android:text=""
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <ImageView
+        android:id="@+id/imgGestion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@mipmap/imagen4"
+        android:layout_marginTop="70dp"
+        android:onClick="buttonTapped"
+        android:layout_below="@+id/textSaludo"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textGestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gestionar_usuarios"
+        android:textSize="15sp"
+        android:layout_below="@+id/imgGestion"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
+
+    <ImageView
+        android:id="@+id/imgPedido"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:background="@mipmap/imagen5"
+        android:layout_below="@+id/textGestion"
+        android:layout_alignLeft="@+id/imgGestion"
+        android:layout_alignStart="@+id/imgGestion"
+        android:onClick="buttonTapped"/>
+
+    <TextView
+        android:id="@+id/textPedido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/registrar_pedido"
+        android:textSize="15sp"
+        android:layout_below="@+id/imgPedido"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="12dp" />
+
+    <ImageView
+        android:id="@+id/imgLogout"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@mipmap/imagen6"
+        android:layout_above="@+id/imgGestion"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:onClick="buttonTapped"/>
 
 </RelativeLayout>

@@ -16,4 +16,6 @@
     <string name="bienvenido">¡Bienvenido!</string>
     <string name="rastrear">Rastrear</string>
     <string name="title_activity_maps">Map</string>
+    <string name="registrar_pedido">Registrar pedido</string>
+    <string name="gestionar_usuarios">Gestionar usuarios</string>
 </resources>

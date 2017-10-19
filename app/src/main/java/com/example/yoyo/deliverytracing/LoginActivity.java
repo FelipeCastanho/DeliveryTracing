@@ -86,13 +86,14 @@ public class LoginActivity extends AppCompatActivity {
                     Map.Entry<String, Object> entryPedido = itUsuario.next();
                     if(entryPedido.getKey().equals("usuario")){
                         user = (String)entryPedido.getValue();
-                        nombreUsuario = user;
                     }
                     else if(entryPedido.getKey().equals("password")){
                         password = (String)entryPedido.getValue();
                     }
                     else if(entryPedido.getKey().equals("tipo")){
                         tipo = (String)entryPedido.getValue();
+                    }else if(entryPedido.getKey().equals("nombreEmpleado")){
+                        nombreUsuario = (String) entryPedido.getValue();
                     }
                 }
                 if(usuario.equals(user)){
