@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
                     }else if(entryPedido.getKey().equals("nombreEmpleado")){
                         nombreUsuario = (String) entryPedido.getValue();
                     }if(entryPedido.getKey().contains("empresa")){
-                        idEmpresa = (String) entryPedido.getValue();
+                        idEmpresa = (String) entryPedido.getKey();
                     }
                 }
                 if(usuario.equals(user)){
@@ -125,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
         catch (Exception ex){
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
-                            "Error al iniciar sesión", Toast.LENGTH_SHORT);
+                            "Error al iniciar sesión "+ex.getMessage(), Toast.LENGTH_SHORT);
             toast1.show();
         }
         return "";
