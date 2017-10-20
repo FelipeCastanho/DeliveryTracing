@@ -29,6 +29,9 @@ public class AdministradorActivity extends AppCompatActivity {
 
         if(id.equals("imgPedido")) {
             Intent newActivity = new Intent(AdministradorActivity.this, PedidoActivity.class);
+            newActivity.putExtra("tipo", getIntent().getExtras().getString("tipo"));
+            newActivity.putExtra("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
+            newActivity.putExtra("idEmpresa", getIntent().getExtras().getString("idEmpresa"));
             startActivity(newActivity);
         }
     }
