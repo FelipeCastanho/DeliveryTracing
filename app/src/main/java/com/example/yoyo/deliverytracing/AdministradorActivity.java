@@ -1,5 +1,6 @@
 package com.example.yoyo.deliverytracing;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +28,8 @@ public class AdministradorActivity extends AppCompatActivity {
         String id = view.getResources().getResourceEntryName(numId);
 
         if(id.equals("imgPedido")) {
-            Toast t = Toast.makeText(getApplicationContext(), "apachurrado pedido", Toast.LENGTH_SHORT);
-            t.show();
+            Intent newActivity = new Intent(AdministradorActivity.this, PedidoActivity.class);
+            startActivity(newActivity);
         }
     }
 }
