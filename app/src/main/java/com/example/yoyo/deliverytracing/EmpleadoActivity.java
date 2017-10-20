@@ -30,17 +30,17 @@ public class EmpleadoActivity extends AppCompatActivity {
         int numId = view.getId();
         String id = view.getResources().getResourceEntryName(numId);
         if(id.equals("imgPedidosDisponibles")){
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Pedidos disponibles", Toast.LENGTH_SHORT);
-            toast1.show();
+            Intent newActivity = new Intent(EmpleadoActivity.this,PedidosDisponiblesActivity.class);
+            String idEmpresa = getIntent().getExtras().getString("idEmpresa");
+            newActivity.putExtra("idEmpresa", idEmpresa);
+            startActivity(newActivity );
         } else if(id.equals("imgMisPedidos")){
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
                             "Mis pedidos", Toast.LENGTH_SHORT);
             toast1.show();
         } else if(id.equals("imgLogout")){
-            Intent newActivity = new Intent(EmpleadoActivity.this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            Intent newActivity = new Intent(EmpleadoActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(newActivity );
         }
     }
