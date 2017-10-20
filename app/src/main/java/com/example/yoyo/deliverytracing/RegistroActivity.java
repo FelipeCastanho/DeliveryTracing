@@ -119,16 +119,22 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public int ultimoEmpleado(){
-        int numeroEmpleado;
+        int numeroEmpleado = 0;
         try{
 
             Iterator<Map.Entry<String, Object>> it = mapEmpleado.entrySet().iterator();
-            Map.Entry<String, Object> entry = it.next();
+            Map.Entry<String, Object> entry;
 
-            String ultimoEmpleado = entry.getKey();
-            String[] numero = ultimoEmpleado.split("empleado");
-
-            numeroEmpleado = Integer.parseInt(numero[1]);
+            while(it.hasNext()){
+                int aux;
+                entry = it.next();
+                String ultimoPedido = entry.getKey();
+                String[] numero = ultimoPedido.split("empleado");
+                aux = Integer.parseInt(numero[1]);
+                if(aux > numeroEmpleado){
+                    numeroEmpleado = aux;
+                }
+            }
 
         }catch (Exception ex){
             numeroEmpleado = 1;
@@ -138,16 +144,21 @@ public class RegistroActivity extends AppCompatActivity {
     }
 
     public int ultimaEmpresa(){
-        int numeroEmpresa;
+        int numeroEmpresa = 0;
         try{
 
             Iterator<Map.Entry<String, Object>> it = mapEmpresa.entrySet().iterator();
-            Map.Entry<String, Object> entry = it.next();
-
-            String ultimoEmpleado = entry.getKey();
-            String[] numero = ultimoEmpleado.split("empresa");
-
-            numeroEmpresa = Integer.parseInt(numero[1]);
+            Map.Entry<String, Object> entry;
+            while(it.hasNext()){
+                int aux;
+                entry = it.next();
+                String ultimoPedido = entry.getKey();
+                String[] numero = ultimoPedido.split("empresa");
+                aux = Integer.parseInt(numero[1]);
+                if(aux > numeroEmpresa){
+                    numeroEmpresa = aux;
+                }
+            }
 
         }catch (Exception ex){
             numeroEmpresa = 1;

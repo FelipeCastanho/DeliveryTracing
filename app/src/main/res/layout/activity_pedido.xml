@@ -32,8 +32,8 @@
         android:id="@+id/textInputLayoutCliente"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_below="@+id/imgRegistroPedido"
+        android:layout_marginTop="46dp"
+        android:layout_below="@+id/textRegistroPedido"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -49,9 +49,10 @@
         android:id="@+id/textInputLayoutDireccion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textInputLayoutCliente"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp">
 
         <EditText
             android:id="@+id/direccion"
@@ -65,30 +66,33 @@
         android:id="@+id/textInputLayoutTelefono"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
         android:layout_below="@+id/textInputLayoutDireccion"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="45dp">
+        android:layout_alignParentStart="true">
 
+        <EditText
+            android:id="@+id/telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textInputLayoutDireccion"
+            android:layout_marginTop="18dp"
+            android:layout_weight="1"
+            android:hint="@string/telefono"
+            android:inputType="number" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/botonRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayoutTelefono"
+        android:layout_marginTop="34dp"
+        android:layout_toLeftOf="@+id/imgRegistroPedido"
+        android:layout_toStartOf="@+id/imgRegistroPedido"
         android:text="@string/registrar"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="54dp" />
-
-    <EditText
-        android:id="@+id/telefono"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textInputLayoutDireccion"
-        android:layout_marginTop="18dp"
-        android:hint="@string/telefono"
-        android:inputType="text" />
+        android:onClick="buttonTapped"/>
 
 </RelativeLayout>
