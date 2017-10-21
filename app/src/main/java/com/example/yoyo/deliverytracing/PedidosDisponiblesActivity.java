@@ -85,7 +85,7 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
         try{
             Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator(); //Se crea el iterador del map recibido en el listener (Contine todos los pedidos)
             Map.Entry<String, Object> entry= null; // Se crea la variable auxiliar entry que almacenara la llave y el valor existentes en el map (idPedido - Map con datos de pedido)
-            String n=null;
+            String n = null;
             while (it.hasNext()) {
                 entry= it.next();
                 n = entry.getKey(); // Aqui se tiene la llave del pedido actualmente recorrido en el ciclo

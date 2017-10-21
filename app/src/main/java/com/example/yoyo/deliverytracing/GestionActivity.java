@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +28,9 @@ public class GestionActivity extends AppCompatActivity {
     private String empresa;
     private int cedula;
     private boolean encontrado;
+    private ListView listaEmpleados;
+    private String[] nombres;
+    private GestionActivity actividad = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +54,15 @@ public class GestionActivity extends AppCompatActivity {
         empresa = getIntent().getExtras().getString("idEmpresa");
         cedula = 0;
         encontrado = false;
+        listaEmpleados = (ListView)findViewById(R.id.listEmpleados);
         database = FirebaseDatabase.getInstance();
         myRefEmpleados = database.getReference("empleados");
         ValueEventListener empleadosListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 mapEmpleados = (Map<String, Object>) dataSnapshot.getValue();
+                nombres = actualizarLista(empresa);
+                ArrayAdapter<String> adaptador = new ArrayAdapter<>(GestionActivity.this, android.R.layout.simple_list_item_1, nombres);
+                listaEmpleados.setAdapter(adaptador);
             }
             public void onCancelled(DatabaseError databaseError) {
             }
@@ -125,5 +134,32 @@ public class GestionActivity extends AppCompatActivity {
             mensaje.show();
         }
         encontrado = false;
+    }
+
+    public String[] actualizarLista(String id){
+        String palabras = "";
+        String idEmpresa = "";
+        String nombreEmpleado = "";
+        Iterator<Map.Entry<String, Object>> it = mapEmpleados.entrySet().iterator();
+        Map.Entry<String, Object> entry;
+        while(it.hasNext()) {
+            entry = it.next();
+            Map<String, Object> mapEmpleado = (Map<String, Object>) entry.getValue();
+            Iterator<Map.Entry<String, Object>> itEmpleado = mapEmpleado.entrySet().iterator();
+            while (itEmpleado.hasNext()) {
+                Map.Entry<String, Object> entryPedido = itEmpleado.next();
+                if(entryPedido.getKey().contains("empresa")){
+                    idEmpresa = entryPedido.getKey().toString();
+                }else if(entryPedido.getKey().equals("nombreEmpleado")){
+                    nombreEmpleado = entryPedido.getValue().toString();
+                }
+            }
+            if(idEmpresa.equals(id)){
+                palabras += nombreEmpleado + ";";
+            }
+        }
+
+        return palabras.split(";");
+
     }
 }
