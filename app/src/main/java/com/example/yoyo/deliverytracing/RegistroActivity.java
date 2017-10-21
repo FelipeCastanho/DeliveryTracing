@@ -30,7 +30,11 @@ public class RegistroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_registro);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         database = FirebaseDatabase.getInstance();
         myRefEmpleados = database.getReference("empleados");
         ValueEventListener empleadoListener = new ValueEventListener() {

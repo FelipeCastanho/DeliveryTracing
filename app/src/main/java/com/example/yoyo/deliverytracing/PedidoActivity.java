@@ -29,7 +29,11 @@ public class PedidoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_pedido);
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
         empresa = getIntent().getExtras().getString("idEmpresa");
         database = FirebaseDatabase.getInstance();
         myRefPedidos = database.getReference("pedidos");
@@ -66,12 +70,7 @@ public class PedidoActivity extends AppCompatActivity {
                     myRefPedidos.child("pd" + codigo).child("telefono").setValue(Integer.parseInt(telefono.getText().toString()));
                     myRefPedidos.child("pd" + codigo).child("estado").setValue("inactivo");
                     myRefPedidos.child("pd" + codigo).child(empresa+"").setValue(true);
-                    AlertDialog.Builder mensaje;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        mensaje = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
-                    } else {
-                        mensaje = new AlertDialog.Builder(this);
-                    }
+                    AlertDialog.Builder mensaje = new AlertDialog.Builder(this);
                     mensaje.setTitle("Código").setMessage("El pedido ha sido registrado. El código es: pd"+codigo)
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
@@ -80,7 +79,6 @@ public class PedidoActivity extends AppCompatActivity {
                                 }
                             })
                             .show();
-
                 }
             }catch (Exception ex){
                 Toast t = Toast.makeText(getApplicationContext(), "Error al registrar el pedido", Toast.LENGTH_SHORT);

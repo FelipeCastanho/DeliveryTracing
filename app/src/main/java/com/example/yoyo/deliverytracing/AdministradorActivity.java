@@ -33,6 +33,10 @@ public class AdministradorActivity extends AppCompatActivity {
             newActivity.putExtra("nombreUsuario", getIntent().getExtras().getString("nombreUsuario"));
             newActivity.putExtra("idEmpresa", getIntent().getExtras().getString("idEmpresa"));
             startActivity(newActivity);
+        }else if(id.equals("imgGestion")){
+            Intent newActivity = new Intent(AdministradorActivity.this, GestionActivity.class);
+            newActivity.putExtra("idEmpresa", getIntent().getExtras().getString("idEmpresa"));
+            startActivity(newActivity);
         }
     }
 }

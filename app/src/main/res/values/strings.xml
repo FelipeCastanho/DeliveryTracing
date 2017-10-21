@@ -25,4 +25,6 @@
     <string name="direcci_n">Dirección</string>
     <string name="telefono">Telefono</string>
     <string name="registrar">Registrar</string>
+    <string name="title_activity_gestion">GestionActivity</string>
+    <string name="empleados">Empleados</string>
 </resources>

@@ -33,7 +33,11 @@
         <activity android:name=".AdministradorActivity" />
         <activity android:name=".EmpleadoActivity" />
         <activity android:name=".PedidoActivity" />
-        <activity android:name=".PedidosDisponiblesActivity"></activity>
+        <activity android:name=".PedidosDisponiblesActivity" />
+        <activity
+            android:name=".GestionActivity"
+            android:label="@string/title_activity_gestion"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
