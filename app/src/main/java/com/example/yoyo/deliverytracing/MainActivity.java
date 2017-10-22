@@ -1,7 +1,10 @@
 package com.example.yoyo.deliverytracing;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +35,29 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
+        SharedPreferences sharedPreference = getSharedPreferences("DeliveryTracing",Context.MODE_PRIVATE);
+        String tipo = sharedPreference.getString("tipo","No hay dato");
+        String nombreUsuario = sharedPreference.getString("nombreUsuario","No hay dato");
+        String idEmpresa = sharedPreference.getString("idEmpresa","No hay dato");
+        String idUsuario = sharedPreference.getString("idUsuario","No hay dato");
+        if(!tipo.equals("No hay dato")){
+            if(tipo.equals("administrador")){
+                Intent newActivity = new Intent(MainActivity.this, AdministradorActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                newActivity.putExtra("tipo", tipo);
+                newActivity.putExtra("nombreUsuario", nombreUsuario);
+                newActivity.putExtra("idEmpresa", idEmpresa);
+                newActivity.putExtra("idUsuario", idUsuario);
+                startActivity(newActivity );
+            }else if(tipo.equals("empleado")){
+                Intent newActivity = new Intent(MainActivity.this, EmpleadoActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                newActivity.putExtra("tipo", tipo);
+                newActivity.putExtra("nombreUsuario", nombreUsuario);
+                newActivity.putExtra("idEmpresa", idEmpresa);
+                newActivity.putExtra("idUsuario", idUsuario);
+                startActivity(newActivity );
+            }
+        }
+
     }
 
     public void buttonTapped(View view) {
@@ -46,7 +72,7 @@ public class MainActivity extends AppCompatActivity{
             if(!estado.equals("activo") && !estado.equals("")){
                 Toast toast1 =
                         Toast.makeText(getApplicationContext(),
-                                "Su pedido todavía se encuentra en proceso" + " sd "+estado, Toast.LENGTH_SHORT);
+                                "Su pedido todavía se encuentra en proceso", Toast.LENGTH_SHORT);
                 toast1.show();
             }
            else if (!referencia.equals("")){

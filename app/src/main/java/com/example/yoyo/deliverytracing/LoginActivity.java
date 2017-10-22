@@ -1,6 +1,8 @@
 package com.example.yoyo.deliverytracing;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     String nombreUsuario = "";
     String idEmpresa = "";
     String idUsuario = "";
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -48,6 +51,13 @@ public class LoginActivity extends AppCompatActivity {
         String pass = campo2.getText().toString();
         String tipo = buscarEmpleado(usuario, pass);
         if(tipo.equals("administrador")){
+            SharedPreferences sharedPreference = getSharedPreferences("DeliveryTracing",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreference.edit();
+            editor.putString("tipo", tipo);
+            editor.putString("nombreUsuario", nombreUsuario);
+            editor.putString("idEmpresa", idEmpresa);
+            editor.putString("idUsuario", idUsuario);
+            editor.commit();
             Intent newActivity = new Intent(LoginActivity.this, AdministradorActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);
@@ -55,6 +65,13 @@ public class LoginActivity extends AppCompatActivity {
             newActivity.putExtra("idUsuario", idUsuario);
             startActivity(newActivity );
         }else if(tipo.equals("empleado")){
+            SharedPreferences sharedPreference = getSharedPreferences("DeliveryTracing",Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreference.edit();
+            editor.putString("tipo", tipo);
+            editor.putString("nombreUsuario", nombreUsuario);
+            editor.putString("idEmpresa", idEmpresa);
+            editor.putString("idUsuario", idUsuario);
+            editor.commit();
             Intent newActivity = new Intent(LoginActivity.this, EmpleadoActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);

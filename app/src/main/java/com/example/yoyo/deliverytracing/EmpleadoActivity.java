@@ -1,12 +1,16 @@
 package com.example.yoyo.deliverytracing;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
 
 public class EmpleadoActivity extends AppCompatActivity {
 
@@ -43,7 +47,14 @@ public class EmpleadoActivity extends AppCompatActivity {
             newActivity.putExtra("idUsuario", idUsuario);
             startActivity(newActivity );
         } else if(id.equals("imgLogout")){
-            Intent newActivity = new Intent(EmpleadoActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            SharedPreferences sharedPreference = getSharedPreferences("DeliveryTracing", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreference.edit();
+            editor.putString("tipo", "No hay dato");
+            editor.putString("nombreUsuario", "No hay dato");
+            editor.putString("idEmpresa", "No hay dato");
+            editor.putString("idUsuario", "No hay dato");
+            editor.commit();
+            Intent newActivity = new Intent(EmpleadoActivity.this,MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(newActivity );
         }
     }
