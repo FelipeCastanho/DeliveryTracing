@@ -1,6 +1,12 @@
 package com.example.yoyo.deliverytracing;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.Marker;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,9 +35,9 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
     PedidosDisponiblesActivity objeto = this;
     String[] codigos = null;
     int posicion = 0;
-    String idUsuario = "";
     private ListView list;
     private String[] lista = {};
+    String idUsuario = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,5 +136,4 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
 
         return listaRespuesta;
     }
-
 }

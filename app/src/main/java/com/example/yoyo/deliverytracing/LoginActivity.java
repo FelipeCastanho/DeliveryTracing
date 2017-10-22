@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.view.menu.ExpandedMenuView;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -146,7 +147,7 @@ public class LoginActivity extends AppCompatActivity {
         catch (Exception ex){
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
-                            "Error al iniciar sesión ", Toast.LENGTH_SHORT);
+                            "Error al iniciar sesión "+ex.getMessage(), Toast.LENGTH_SHORT);
             toast1.show();
         }
         return "";
