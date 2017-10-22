@@ -68,7 +68,7 @@ public class PedidoActivity extends AppCompatActivity {
                     myRefPedidos.child("pd" + codigo).child("cliente").setValue(cliente.getText().toString());
                     myRefPedidos.child("pd" + codigo).child("direccion").setValue(direccion.getText().toString());
                     myRefPedidos.child("pd" + codigo).child("telefono").setValue(Integer.parseInt(telefono.getText().toString()));
-                    myRefPedidos.child("pd" + codigo).child("estado").setValue("inactivo");
+                    myRefPedidos.child("pd" + codigo).child("estado").setValue("En proceso");
                     myRefPedidos.child("pd" + codigo).child(empresa+"").setValue(true);
                     AlertDialog.Builder mensaje = new AlertDialog.Builder(this);
                     mensaje.setTitle("Código").setMessage("El pedido ha sido registrado. El código es: pd"+codigo)
