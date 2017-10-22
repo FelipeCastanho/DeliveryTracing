@@ -73,7 +73,7 @@ public class MisPedidosActivity extends AppCompatActivity {
                 });
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialogo1, int id) {
-                        //myRef.child(codigos[posicion]).child("estado").setValue("Finalizado");
+                        myRef.child(codigos[posicion]).child("estado").setValue("Finalizado");
                         map.remove(codigos[posicion]);
                         myRef.setValue(map);
                     }
