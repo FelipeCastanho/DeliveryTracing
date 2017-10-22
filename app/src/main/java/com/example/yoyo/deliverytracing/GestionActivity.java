@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -30,7 +31,7 @@ public class GestionActivity extends AppCompatActivity {
     private boolean encontrado;
     private ListView listaEmpleados;
     private String[] nombres;
-    private GestionActivity actividad = this;
+    private String[] llaves;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,29 @@ public class GestionActivity extends AppCompatActivity {
             }
         };
         myRefEmpleados.addValueEventListener(empleadosListener);
+        listaEmpleados.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                AlertDialog.Builder dialogo = new AlertDialog.Builder(GestionActivity.this);
+                dialogo.setTitle("Eliminar");
+                dialogo.setMessage("¿Desea eliminar a "+ nombres[position] +"?");
+                dialogo.setCancelable(false);
+                dialogo.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface dialogo1, int id) {
+                    Map<String, Object> empleado = (Map<String, Object>) mapEmpleados.get(llaves[position]);
+                    empleado.remove(empresa);
+                    myRefEmpleados.setValue(mapEmpleados);
+                    }
+                });
+                dialogo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+
+                    }
+                });
+                dialogo.show();
+
+            }
+        });
     }
 
     public void buttonTapped(View view) {
@@ -140,6 +164,8 @@ public class GestionActivity extends AppCompatActivity {
         String palabras = "";
         String idEmpresa = "";
         String nombreEmpleado = "";
+        String tipo = "";
+        String keys = "";
         Iterator<Map.Entry<String, Object>> it = mapEmpleados.entrySet().iterator();
         Map.Entry<String, Object> entry;
         while(it.hasNext()) {
@@ -150,15 +176,19 @@ public class GestionActivity extends AppCompatActivity {
                 Map.Entry<String, Object> entryPedido = itEmpleado.next();
                 if(entryPedido.getKey().contains("empresa")){
                     idEmpresa = entryPedido.getKey().toString();
+                }else if(entryPedido.getKey().equals("tipo")){
+                    tipo = entryPedido.getValue().toString();
                 }else if(entryPedido.getKey().equals("nombreEmpleado")){
                     nombreEmpleado = entryPedido.getValue().toString();
                 }
             }
-            if(idEmpresa.equals(id)){
+            if(idEmpresa.equals(id) && tipo.equals("empleado")){
                 palabras += nombreEmpleado + ";";
+                keys += entry.getKey()+";";
             }
+            idEmpresa="";
         }
-
+        llaves = keys.split(";");
         return palabras.split(";");
 
     }
