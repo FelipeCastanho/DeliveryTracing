@@ -40,6 +40,8 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
     private GoogleMap mMap;
     private Marker marcador;
     Location location = new Location(LocationManager.GPS_PROVIDER);
+    float zoom = 17;
+    boolean firstTime = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,13 +61,17 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
         mLatitud.addValueEventListener(this);
         mLongitud.addValueEventListener(this);
         estadoPedido.addValueEventListener(this);
-
     }
 
     public void onMapReady(GoogleMap googleMap) {
 
         mMap = googleMap;
-
+        GoogleMap.OnCameraMoveListener listenerCamara = new GoogleMap.OnCameraMoveListener(){
+            public void onCameraMove() {
+                zoom = mMap.getCameraPosition().zoom;
+            }
+        };
+        mMap.setOnCameraMoveListener(listenerCamara);
     }
 
     public void agregarMarcador(double latitud, double longitud) {
@@ -75,7 +81,7 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
         }
         //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher))
         marcador = mMap.addMarker(new MarkerOptions().position(coordenadas).title("Mi ubicación"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 16));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, zoom));
     }
 
     private void actualizarUbicacion(Location location) {
@@ -83,6 +89,7 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
             double latitud = location.getLatitude();
             double longitud = location.getLongitude();
             agregarMarcador(latitud, longitud);
+
         }
     }
 
