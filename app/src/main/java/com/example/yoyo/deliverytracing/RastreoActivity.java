@@ -59,6 +59,7 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
         mLatitud.addValueEventListener(this);
         mLongitud.addValueEventListener(this);
         estadoPedido.addValueEventListener(this);
+
     }
 
     public void onMapReady(GoogleMap googleMap) {
@@ -92,17 +93,9 @@ public class RastreoActivity extends AppCompatActivity  implements OnMapReadyCal
                 if(key.equals("latitud")){
                     Double latitud = dataSnapshot.getValue(Double.class);
                     location.setLatitude(latitud);
-                    Toast toast1 =
-                            Toast.makeText(getApplicationContext(),
-                                    latitud+"", Toast.LENGTH_SHORT);
-                    toast1.show();
                 }else if(key.equals("longitud")) {
                     Double longitud = dataSnapshot.getValue(Double.class);
                     location.setLongitude(longitud);
-                    Toast toast1 =
-                            Toast.makeText(getApplicationContext(),
-                                    longitud + "", Toast.LENGTH_SHORT);
-                    toast1.show();
                 }
             }
             actualizarUbicacion(location);

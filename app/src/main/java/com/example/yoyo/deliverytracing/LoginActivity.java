@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     Map<String, Object> map = null;
     String nombreUsuario = "";
     String idEmpresa = "";
+    String idUsuario = "";
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -51,12 +52,14 @@ public class LoginActivity extends AppCompatActivity {
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);
             newActivity.putExtra("idEmpresa", idEmpresa);
+            newActivity.putExtra("idUsuario", idUsuario);
             startActivity(newActivity );
         }else if(tipo.equals("empleado")){
             Intent newActivity = new Intent(LoginActivity.this, EmpleadoActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             newActivity.putExtra("tipo", tipo);
             newActivity.putExtra("nombreUsuario", nombreUsuario);
             newActivity.putExtra("idEmpresa", idEmpresa);
+            newActivity.putExtra("idUsuario", idUsuario);
             startActivity(newActivity );
         }
     }
@@ -89,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     Map.Entry<String, Object> entryPedido = itUsuario.next();
                     if(entryPedido.getKey().equals("usuario")){
                         user = (String)entryPedido.getValue();
+                        idUsuario = entry.getKey();
                     }
                     else if(entryPedido.getKey().equals("password")){
                         password = (String)entryPedido.getValue();
@@ -125,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
         catch (Exception ex){
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
-                            "Error al iniciar sesión "+ex.getMessage(), Toast.LENGTH_SHORT);
+                            "Error al iniciar sesión ", Toast.LENGTH_SHORT);
             toast1.show();
         }
         return "";

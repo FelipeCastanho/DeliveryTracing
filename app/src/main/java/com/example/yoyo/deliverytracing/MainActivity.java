@@ -43,10 +43,10 @@ public class MainActivity extends AppCompatActivity{
             EditText et1 = (EditText)findViewById(R.id.codigo);
             String codigo = et1.getText().toString();
             referencia = buscarPedido(codigo);
-            if(!estado.equals("activo") && !referencia.equals("")){
+            if(!estado.equals("activo") && !estado.equals("")){
                 Toast toast1 =
                         Toast.makeText(getApplicationContext(),
-                                "Su pedido todavía se encuentra en proceso", Toast.LENGTH_SHORT);
+                                "Su pedido todavía se encuentra en proceso" + " sd "+estado, Toast.LENGTH_SHORT);
                 toast1.show();
             }
            else if (!referencia.equals("")){
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity{
                 newActivity.putExtra("codigo", codigo);
                 startActivity(newActivity );
             }
+            estado = "";
         }
         else if(id.equals("login")){
             Intent newActivity = new Intent(MainActivity.this,LoginActivity.class);
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity{
                             "No se ha encontrado el pedido", Toast.LENGTH_SHORT);
             toast1.show();
         }
-        if(respuesta.equals("")){
+        if(respuesta.equals("") && estado.equals("")){
             Toast toast1 =
                     Toast.makeText(getApplicationContext(),
                             "No se ha encontrado el pedido", Toast.LENGTH_SHORT);

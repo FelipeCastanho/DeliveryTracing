@@ -20,34 +20,30 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.Iterator;
 import java.util.Map;
 
-public class PedidosDisponiblesActivity extends AppCompatActivity {
+public class MisPedidosActivity extends AppCompatActivity {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = null;
-    String idEmpresa;
-    PedidosDisponiblesActivity objeto = this;
+    String idEmpleado;
+    MisPedidosActivity objeto = this;
     String[] codigos = null;
     int posicion = 0;
-    String idUsuario = "";
+    Map<String, Object> map = null;
     private ListView list;
     private String[] lista = {};
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_pedidos_disponibles);
-        idEmpresa = getIntent().getExtras().getString("idEmpresa");
-        list = (ListView)findViewById(R.id.listview);
-        idUsuario = getIntent().getExtras().getString("idUsuario");
-    }
-
-    protected void onStart() {
-        super.onStart();
+        setContentView(R.layout.activity_mis_pedidos);
+        idEmpleado = getIntent().getExtras().getString("idUsuario");
+        list = (ListView)findViewById(R.id.listview2);
         myRef = database.getReference("pedidos");
         ValueEventListener pedidoListener = new ValueEventListener() {
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                lista = actualizarLista(map, idEmpresa);
+                map = (Map<String, Object>) dataSnapshot.getValue();
+                lista = actualizarLista(map, idEmpleado);
                 ArrayAdapter<String> adaptador = new ArrayAdapter<String>(objeto, android.R.layout.simple_list_item_1, lista);
                 list.setAdapter(adaptador);
             }
@@ -58,8 +54,8 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlertDialog.Builder dialogo1 = new AlertDialog.Builder(objeto);
-                dialogo1.setTitle("Confirmación de pedido");
-                dialogo1.setMessage("¿Desea agregar el pedido "+ codigos[position] +" a su lista de pedidos y activar el seguimiento?");
+                dialogo1.setTitle("Confirmación de entrega");
+                dialogo1.setMessage("¿Desea actualizar el pedido "+ codigos[position] +" como actualizado y finalizar el seguimiento?");
                 dialogo1.setCancelable(false);
                 posicion = position;
                 dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -69,8 +65,9 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
                 });
                 dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialogo1, int id) {
-                        myRef.child(codigos[posicion]).child("estado").setValue("activo");
-                        myRef.child(codigos[posicion]).child(idUsuario).setValue(true);
+                        //myRef.child(codigos[posicion]).child("estado").setValue("Finalizado");
+                        map.remove(codigos[posicion]);
+                        myRef.setValue(map);
                     }
                 });
                 dialogo1.show();
@@ -79,7 +76,7 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
         });
     }
 
-    private String[] actualizarLista(Map<String, Object> map, String idEmpresa) {
+    private String[] actualizarLista(Map<String, Object> map, String idEmpleado) {
         String lista = "";
         String estado = "";
         String fila = "";
@@ -106,11 +103,11 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
                     if(entryPedido.getKey().equals("estado")){
                         estado = (String) entryPedido.getValue();
                     }
-                    if(entryPedido.getKey().contains("empresa")){
+                    if(entryPedido.getKey().contains("empleado")){
                         id = (String) entryPedido.getKey();
                     }
                 }
-                if(idEmpresa.equals(id) && estado.equals("En proceso")){
+                if(idEmpleado.equals(id) && estado.equals("activo")){
                     lista += fila +";";
                 }
                 fila = "";
@@ -126,8 +123,6 @@ public class PedidosDisponiblesActivity extends AppCompatActivity {
         for(int i = 0; i < listaRespuesta.length; i++){
             codigos[i]= listaRespuesta[i].split("\t \t \t \t \t")[0];
         }
-
         return listaRespuesta;
     }
-
 }

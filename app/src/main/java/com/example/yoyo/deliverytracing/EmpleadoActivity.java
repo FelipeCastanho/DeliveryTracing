@@ -33,12 +33,15 @@ public class EmpleadoActivity extends AppCompatActivity {
             Intent newActivity = new Intent(EmpleadoActivity.this,PedidosDisponiblesActivity.class);
             String idEmpresa = getIntent().getExtras().getString("idEmpresa");
             newActivity.putExtra("idEmpresa", idEmpresa);
+            String idUsuario = getIntent().getExtras().getString("idUsuario");
+            newActivity.putExtra("idUsuario", idUsuario);
             startActivity(newActivity );
         } else if(id.equals("imgMisPedidos")){
-            Toast toast1 =
-                    Toast.makeText(getApplicationContext(),
-                            "Mis pedidos", Toast.LENGTH_SHORT);
-            toast1.show();
+            Intent newActivity = new Intent(EmpleadoActivity.this,MisPedidosActivity.class);
+            String idEmpresa = getIntent().getExtras().getString("idEmpresa");
+            String idUsuario = getIntent().getExtras().getString("idUsuario");
+            newActivity.putExtra("idUsuario", idUsuario);
+            startActivity(newActivity );
         } else if(id.equals("imgLogout")){
             Intent newActivity = new Intent(EmpleadoActivity.this,LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(newActivity );
